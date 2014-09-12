@@ -39,9 +39,9 @@ enum QueryErrorNumber {
 };
 
 struct QueryError {
-    QueryError(): errno( ENoError ) {}
-    QueryError(const QueryErrorNumber e, const QString& msg): errno( e ), verbose( msg ) {}
-    QueryErrorNumber errno;
+    QueryError(): errornumber( ENoError ) {}
+    QueryError(const QueryErrorNumber e, const QString& msg): errornumber( e ), verbose( msg ) {}
+    QueryErrorNumber errornumber;
     QString verbose;
 };
 
@@ -83,7 +83,7 @@ class Query: public QObject, public QSharedData
          */
         QString getFullQueryString() const;
 
-        int error() const { return (int)m_error.errno; }
+        int error() const { return (int)m_error.errornumber; }
         QString errorMsg() const { return m_error.verbose; }
 
     public slots:
